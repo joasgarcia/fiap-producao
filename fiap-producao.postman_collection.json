@@ -1,0 +1,40 @@
+{
+	"info": {
+		"_postman_id": "b3654f88-20a2-4b4a-890a-3f31ff825079",
+		"name": "fiap-producao",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4543298",
+		"_collection_link": "https://bold-resonance-6781.postman.co/workspace/development~87b27721-dc8a-43eb-83c7-30666598b090/collection/4543298-b3654f88-20a2-4b4a-890a-3f31ff825079?action=share&source=collection_link&creator=4543298"
+	},
+	"item": [
+		{
+			"name": "order-queue",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"orderId\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/queue/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"queue",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
