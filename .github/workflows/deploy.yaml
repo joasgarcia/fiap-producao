@@ -1,0 +1,58 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ASIAVNIY2D7V3EC4434F
+          aws-secret-access-key: 0c55P2SL64RPHs4At6JCxJC4lRqEjaFb3tmED7zP
+          aws-session-token: FwoGZXIvYXdzEFQaDMSw+0LeNWhYDvSXlSLFAQMqEtHnhdqz/1e14ciSgnFLbs0XtRysYjDLPRd2F7CsWI9GIt/Kv4Rbr/DjMyHiR1K0Rdjo1Q8u3r1vWxb+c5TR+0frQDFjPrvnVFzduIBrWVjWUacTa4rVNk3iTK+78VTxocHId9zypqEVNRfUbInNYN6yBWnIOEKjMuHWaBSfVJ1mDrEFF3/l9o62zeynFDbKWsXLkl8cZ0dfYdE45AabvdivKIdsjOV3MvJcBJQ48b1+e7+WEdSxFcYquu5slkHrrbYcKM604a0GMi2xm+Mi++G8IuJWOKXscm6ciNcq7S3OFd8k0rqdmSHfWcxFu5YtX/T/wNnT0nk=
+          aws-region: us-east-1
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build, tag, and push image to Amazon ECR
+        id: build-image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: restaurant-app/pagamento
+          IMAGE_TAG: latest
+        run: |
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
+
+      - name: Download task definition
+        run: |
+          aws ecs describe-task-definition --task-definition production-service-task-family --query taskDefinition > task-definition.json
+
+      - name: Fill in the new image ID in the Amazon ECS task definition
+        id: task-def
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: task-definition.json
+          container-name: production-service-task
+          image: ${{ steps.build-image.outputs.image }}
+
+      - name: Deploy Amazon ECS task definition
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+        with:
+          task-definition: ${{ steps.task-def.outputs.task-definition }}
+          service: production-service-ecs-service
+          cluster: production-service-cluster
+          wait-for-service-stability: true
