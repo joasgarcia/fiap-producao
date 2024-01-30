@@ -14,9 +14,9 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ASIAVNIY2D7VSNFWLLOB
-          aws-secret-access-key: 88MLXrPCW2rCbJjvhEbtFhgI+PhMjOiRNQzgI4cf
-          aws-session-token: FwoGZXIvYXdzEE4aDJMURPnqACpP9qxznyLFAc0adQyYtmZVNNMSfNff+pYDTokrtal/q0AkY0xu2L605Wz+CE3B6rwUj7Gtam66xbvjjbrwUdiW8qCkH1wQp8LhtPH7GCwC172tav+1xUTJ7KhEtd1/NQiROBKARkuQJwhAQRHZpFQLfNuprRD6LxoKpJ5Mv9fd+Hpl3oLtt+0iwe7BGLRZSGIWUwue88Ifhkb+D++WRqRHVbRxgvVPgMiaNZjwsiNtyTT+Gi3gTM47ssuUMbojEkinv7a+xm2LXYk80IuaKO+Q4K0GMi0JgYXW/OQzbpWZE51ahuRuLLxhVQCihbSL1/nwiTz8jwnV8bYzzjopP9ApOZU=
+          aws-access-key-id: ASIAVNIY2D7V3EC4434F
+          aws-secret-access-key: 0c55P2SL64RPHs4At6JCxJC4lRqEjaFb3tmED7zP
+          aws-session-token: FwoGZXIvYXdzEFQaDMSw+0LeNWhYDvSXlSLFAQMqEtHnhdqz/1e14ciSgnFLbs0XtRysYjDLPRd2F7CsWI9GIt/Kv4Rbr/DjMyHiR1K0Rdjo1Q8u3r1vWxb+c5TR+0frQDFjPrvnVFzduIBrWVjWUacTa4rVNk3iTK+78VTxocHId9zypqEVNRfUbInNYN6yBWnIOEKjMuHWaBSfVJ1mDrEFF3/l9o62zeynFDbKWsXLkl8cZ0dfYdE45AabvdivKIdsjOV3MvJcBJQ48b1+e7+WEdSxFcYquu5slkHrrbYcKM604a0GMi2xm+Mi++G8IuJWOKXscm6ciNcq7S3OFd8k0rqdmSHfWcxFu5YtX/T/wNnT0nk=
           aws-region: us-east-1
 
       - name: Checkout code
