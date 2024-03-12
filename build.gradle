@@ -36,6 +36,13 @@ dependencies {
 
 	runtimeOnly 'com.mysql:mysql-connector-j:8.0.33'
 
+	implementation 'io.awspring.cloud:spring-cloud-aws:3.0.4'
+	implementation 'io.awspring.cloud:spring-cloud-aws-starter-sqs:3.0.4'
+
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	implementation 'org.apache.logging.log4j:log4j-slf4j-impl'
+
 }
 
 tasks.named('test') {
