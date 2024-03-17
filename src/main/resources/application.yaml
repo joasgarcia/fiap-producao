@@ -12,3 +12,9 @@ spring:
     defer-datasource-initialization: true
   h2:
     console.enabled: true
+
+queue:
+  productionOutbound:
+    name: response-q
+  productionInbound:
+    name: production-q
