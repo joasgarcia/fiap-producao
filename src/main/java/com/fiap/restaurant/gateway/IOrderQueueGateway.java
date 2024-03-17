@@ -6,6 +6,8 @@ public interface IOrderQueueGateway {
 
     void save(OrderQueue orderQueue);
 
+    void update(OrderQueue orderQueue);
+
     OrderQueue findByOrderId(Long orderId);
 
 }

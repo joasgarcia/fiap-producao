@@ -4,6 +4,7 @@ import com.fiap.restaurant.entity.OrderQueue;
 import com.fiap.restaurant.external.db.OrderQueueJpa;
 import com.fiap.restaurant.types.db.OrderQueueDatabaseConnection;
 import com.fiap.restaurant.types.mapper.OrderQueueMapper;
+import org.springframework.beans.BeanUtils;
 
 @SuppressWarnings("unchecked")
 public class OrderQueueGateway implements IOrderQueueGateway {
@@ -20,6 +21,14 @@ public class OrderQueueGateway implements IOrderQueueGateway {
         orderQueueJpa.setOrderId(orderQueue.getOrderId());
         orderQueueJpa.setStatus(orderQueue.getStatus());
 
+        this.orderQueueDatabaseConnection.save(orderQueueJpa);
+    }
+
+    @Override
+    public void update(OrderQueue orderQueue) {
+        OrderQueueJpa orderQueueJpa = (OrderQueueJpa) this.orderQueueDatabaseConnection.findByOrderId(orderQueue.getOrderId());
+
+        BeanUtils.copyProperties(orderQueue, orderQueueJpa, "id");
         this.orderQueueDatabaseConnection.save(orderQueueJpa);
     }
 
