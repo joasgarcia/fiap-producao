@@ -2,12 +2,12 @@ package com.fiap.restaurant.types.dto;
 
 public class SqsOrderResponseDTO {
 
-    private String type;
+    private SqsOrderResponseType type;
 
     private OrderQueueResponseDTO data;
 
 
-    public SqsOrderResponseDTO(String type, Long orderId) {
+    public SqsOrderResponseDTO(SqsOrderResponseType type, Long orderId) {
         this.setType(type);
 
         OrderQueueResponseDTO orderQueueResponseDTO = new OrderQueueResponseDTO();
@@ -16,11 +16,11 @@ public class SqsOrderResponseDTO {
         this.data = orderQueueResponseDTO;
     }
 
-    public String getType() {
+    public SqsOrderResponseType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(SqsOrderResponseType type) {
         this.type = type;
     }
 
