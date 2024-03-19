@@ -13,7 +13,7 @@ public class HealthCheckController {
     @GetMapping("/")
     public ResponseEntity<Object> index() {
         HashMap<String, String> map = new HashMap<>();
-        map.put("health", "true");
+        map.put("health_producao", "true");
 
         return new ResponseEntity<>(map, HttpStatus.OK);
     }
